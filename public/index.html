@@ -12,6 +12,21 @@
     <body>
         <div class="container">
             <h1 class="title">Todo List</h1>
+            <div class="add-task">
+                <form class="add-task__form">
+                    <input type="text" class="add-task__input" placeholder="Ajouter une nouvelle tâche">
+                    <button type="submit" class="add-task__button">Ajouter</button>
+                </form>
+                <div class="filter">
+                    <select class="filter__select">
+                      <option value="all">Toutes les tâches</option>
+                      <option value="completed">Tâches terminées</option>
+                      <option value="pending">Tâches en cours</option>
+                    </select>
+                </div>            
+                <ul class="add-task__list">
+                </ul>
+            </div>
         </div>
 
         <script src="/dist/index.js"></script>
