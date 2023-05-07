@@ -1,0 +1,10 @@
+{
+    "server": {
+      "baseDir": ["public", "dist"],
+      "routes": {
+        "/dist": "dist"
+      }
+    },
+    "files": ["public/**/*", "dist/**/*", "public/*.html", "public/*.css"]
+  }
+  
