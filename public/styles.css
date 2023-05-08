@@ -74,6 +74,9 @@ body {
 .add-task__list li button:hover {
   background-color: #000000;
 }
+.add-task__list li .delete-button {
+  margin-left: 0.5em;
+}
 
 .filter {
   margin-top: 20px;

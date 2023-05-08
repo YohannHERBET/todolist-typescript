@@ -64,7 +64,16 @@ class App {
       this.filterTasksAndUpdateList();
     });
 
-    listItem.appendChild(completeButton);
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add('delete-button');
+    deleteButton.innerHTML = '<span>&#10006;</span>';
+    deleteButton.addEventListener("click", () => {
+      this.deleteTask(task);
+    });
+    const containerButtons = document.createElement("div");
+    containerButtons.appendChild(completeButton);
+    containerButtons.appendChild(deleteButton);
+    listItem.appendChild(containerButtons);
     this.taskList.appendChild(listItem);
 
     this.tasks.push(task);
@@ -97,7 +106,7 @@ class App {
           ...task,
           completed: !task.completed,
         };
-
+        
         this.tasks = this.tasks.map((t) => (t.id === task.id ? updatedTask : t));
         completeButton.textContent = updatedTask.completed ? "Reprendre" : "Terminer";
         listItem.classList.toggle("completed");
@@ -105,9 +114,23 @@ class App {
         this.filterTasksAndUpdateList();
       });
 
-      listItem.appendChild(completeButton);
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add('delete-button');
+      deleteButton.innerHTML = '<span>&#10006;</span>';
+      deleteButton.addEventListener("click", () => {
+        this.deleteTask(task);
+      });
+      const containerButtons = document.createElement("div");
+      containerButtons.appendChild(completeButton);
+      containerButtons.appendChild(deleteButton);
+      listItem.appendChild(containerButtons);
       this.taskList.appendChild(listItem);
     });
+  }
+
+  private deleteTask(task: Task): void {
+    this.tasks = this.tasks.filter((t) => t.id !== task.id);
+    this.filterTasksAndUpdateList();
   }
 }
 
