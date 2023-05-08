@@ -1,5 +1,6 @@
 import { Task, TaskStatus } from '../models/task';
 import { filterTasks } from '../utils/filterTask';
+import { saveTasks, loadTasks } from '../utils/localStorage';
 
 class App {
   private taskInput: HTMLInputElement;
@@ -16,9 +17,19 @@ class App {
   }
 
   public init(): void {
+    this.loadTasksFromLocalStorage();
     this.addTaskButton.addEventListener("click", this.handleAddTaskButtonClick);
     const selectElement = document.querySelector('.filter__select') as HTMLSelectElement;
     selectElement.addEventListener('change', this.handleFilterSelectChange);
+  }
+
+  private loadTasksFromLocalStorage(): void {
+    this.tasks = loadTasks();
+    this.filterTasksAndUpdateList();
+  }
+
+  private saveTasksToLocalStorage(): void {
+    saveTasks(this.tasks);
   }
 
   private handleAddTaskButtonClick = (e: Event): void => {
@@ -67,6 +78,7 @@ class App {
       listItem.classList.add("completed");
 
       this.filterTasksAndUpdateList();
+      this.saveTasksToLocalStorage();
     });
 
     const deleteButton = document.createElement("button");
@@ -83,6 +95,7 @@ class App {
 
     this.tasks.push(task);
     this.taskInput.value = "";
+    this.saveTasksToLocalStorage();
   }
 
   private filterTasksAndUpdateList(): void {
@@ -122,6 +135,7 @@ class App {
         listItem.classList.toggle("completed");
 
         this.filterTasksAndUpdateList();
+        this.saveTasksToLocalStorage();
       });
 
       const deleteButton = document.createElement("button");
@@ -157,6 +171,7 @@ class App {
   
       this.tasks = this.tasks.map((t) => (t.id === task.id ? updatedTask : t));
       this.filterTasksAndUpdateList();
+      this.saveTasksToLocalStorage();
     };
   
     input.addEventListener("blur", updateTask);
@@ -175,6 +190,7 @@ class App {
   private deleteTask(task: Task): void {
     this.tasks = this.tasks.filter((t) => t.id !== task.id);
     this.filterTasksAndUpdateList();
+    this.saveTasksToLocalStorage();
   }
 }
 
