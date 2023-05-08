@@ -11,24 +11,28 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="title">Todo List</h1>
-            <div class="add-task">
-                <form class="add-task__form">
-                    <input type="text" class="add-task__input" placeholder="Ajouter une nouvelle tâche">
-                    <button type="submit" class="add-task__button">Ajouter</button>
-                </form>
-                <div class="filter">
-                    <select class="filter__select">
-                        <option value="all">Toutes les tâches</option>
-                        <option value="completed">Tâches terminées</option>
-                        <option value="onGoing">Tâches en cours</option>
-                    </select>
-                </div>            
-                <ul class="add-task__list">
-                </ul>
-            </div>
+            <header>
+                <h1 class="title">Todo List</h1>
+            </header>
+            <main>
+                <div class="add-task">
+                    <form class="add-task__form">
+                        <input type="text" class="add-task__input" placeholder="Ajouter une nouvelle tâche">
+                        <button type="submit" class="add-task__button">Ajouter</button>
+                    </form>
+                    <div class="filter">
+                        <select class="filter__select">
+                            <option value="all">Toutes les tâches</option>
+                            <option value="completed">Tâches terminées</option>
+                            <option value="onGoing">Tâches en cours</option>
+                        </select>
+                    </div>            
+                    <ul class="add-task__list">
+                    </ul>
+                </div>
+            </main>
+            <footer></footer>
         </div>
-
         <script src="/dist/bundle.js"></script>
     </body>
 </html>

@@ -1,6 +1,8 @@
 import { Task, TaskStatus } from '../models/task';
 import { filterTasks } from '../utils/filterTask';
 import { saveTasks, loadTasks } from '../utils/localStorage';
+import { fetchDogImage } from '../services/apiDog';
+import { fetchCatImage } from '../services/apiCat';
 
 class App {
   private taskInput: HTMLInputElement;
@@ -8,11 +10,13 @@ class App {
   private taskList: HTMLUListElement;
   private tasks: Task[];
   private selectedStatus: TaskStatus = "all";
+  private footer: HTMLElement;
 
   constructor() {
     this.taskInput = document.querySelector(".add-task__input") as HTMLInputElement;
     this.addTaskButton = document.querySelector(".add-task__button") as HTMLButtonElement;
     this.taskList = document.querySelector(".add-task__list") as HTMLUListElement;
+    this.footer = document.querySelector("footer") as HTMLElement;
     this.tasks = [];
   }
 
@@ -21,6 +25,8 @@ class App {
     this.addTaskButton.addEventListener("click", this.handleAddTaskButtonClick);
     const selectElement = document.querySelector('.filter__select') as HTMLSelectElement;
     selectElement.addEventListener('change', this.handleFilterSelectChange);
+    this.displayCatImage();
+    this.displayDogImage();
   }
 
   private loadTasksFromLocalStorage(): void {
@@ -30,6 +36,24 @@ class App {
 
   private saveTasksToLocalStorage(): void {
     saveTasks(this.tasks);
+  }
+
+  private async displayCatImage(): Promise<void> {
+    const catImageURL = await fetchCatImage();
+    const catImage = document.createElement("img");
+    catImage.src = catImageURL;
+    catImage.alt = "photo de chat un peu foufou"
+    catImage.classList.add("animal-image");
+    this.footer.appendChild(catImage);
+  }
+
+  private async displayDogImage(): Promise<void> {
+    const dogImageURL = await fetchDogImage();
+    const dogImage = document.createElement("img");
+    dogImage.src = dogImageURL;
+    dogImage.alt = "photo de chien qui fait waouf"
+    dogImage.classList.add("animal-image");
+    this.footer.appendChild(dogImage);
   }
 
   private handleAddTaskButtonClick = (e: Event): void => {
