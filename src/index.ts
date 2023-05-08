@@ -1,1 +1,4 @@
-console.log("WELCOME IN MY HEART TS <3");
+import { App } from './components/App';
+
+const app = new App();
+app.init();

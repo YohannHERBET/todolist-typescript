@@ -51,6 +51,30 @@ body {
   list-style-type: none;
   padding: 0;
 }
+.add-task__list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 5px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  border: 1px solid #dcdcdc;
+}
+.add-task__list li button {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  background-color: #383838;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.add-task__list li button:hover {
+  background-color: #000000;
+}
+
 .filter {
   margin-top: 20px;
   display: flex;
