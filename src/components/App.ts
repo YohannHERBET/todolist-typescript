@@ -47,7 +47,12 @@ class App {
     };
 
     const listItem = document.createElement("li");
-    listItem.textContent = task.title;
+    const title = document.createElement("span");
+    title.textContent = task.title;
+    title.addEventListener("click", () => {
+      this.handleTaskClick(listItem, title, task);
+    });
+    listItem.appendChild(title);
 
     const completeButton = document.createElement("button");
     completeButton.textContent = "Terminer";
@@ -97,7 +102,12 @@ class App {
 
     tasks.forEach((task) => {
       const listItem = document.createElement("li");
-      listItem.textContent = task.title;
+      const title = document.createElement("span");
+      title.textContent = task.title;
+      title.addEventListener("click", () => {
+        this.handleTaskClick(listItem, title, task);
+      });
+      listItem.appendChild(title);
 
       const completeButton = document.createElement("button");
       completeButton.textContent = task.completed ? "Reprendre" : "Terminer";
@@ -106,7 +116,7 @@ class App {
           ...task,
           completed: !task.completed,
         };
-        
+
         this.tasks = this.tasks.map((t) => (t.id === task.id ? updatedTask : t));
         completeButton.textContent = updatedTask.completed ? "Reprendre" : "Terminer";
         listItem.classList.toggle("completed");
@@ -128,6 +138,40 @@ class App {
     });
   }
 
+  private handleTaskClick(listItem: HTMLLIElement, title: HTMLSpanElement, task: Task): void {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = task.title;
+  
+    const updateTask = (): void => {
+      const updatedTitle = input.value.trim();
+      if (updatedTitle === "") {
+        alert("La tâche ne peut pas être vide ;)");
+        return;
+      }
+  
+      const updatedTask: Task = {
+        ...task,
+        title: updatedTitle,
+      };
+  
+      this.tasks = this.tasks.map((t) => (t.id === task.id ? updatedTask : t));
+      this.filterTasksAndUpdateList();
+    };
+  
+    input.addEventListener("blur", updateTask);
+  
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        updateTask();
+      }
+    });
+  
+    listItem.replaceChild(input, title);
+    input.focus();
+  }  
+  
   private deleteTask(task: Task): void {
     this.tasks = this.tasks.filter((t) => t.id !== task.id);
     this.filterTasksAndUpdateList();
