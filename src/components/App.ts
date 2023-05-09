@@ -15,7 +15,7 @@ class App {
   private footer: HTMLElement;
 
   constructor() {
-    this.taskInput = document.querySelector(".task__input") as HTMLInputElement;
+    this.taskInput = document.querySelector(".task__form__input") as HTMLInputElement;
     this.addTaskButton = document.querySelector(".task__form__button") as HTMLButtonElement;
     this.taskList = document.querySelector(".task__list") as HTMLUListElement;
     this.searchInput = document.querySelector(".search-task__input") as HTMLInputElement;
