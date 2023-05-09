@@ -1,5 +1,5 @@
 import { Task, TaskStatus } from '../models/task';
-import { filterTasks } from '../utils/filterTask';
+import { filterTasks, searchTasks } from '../utils/filterTask';
 import { saveTasks, loadTasks } from '../utils/localStorage';
 import { fetchDogImage } from '../services/apiDog';
 import { fetchCatImage } from '../services/apiCat';
@@ -8,14 +8,18 @@ class App {
   private taskInput: HTMLInputElement;
   private addTaskButton: HTMLButtonElement;
   private taskList: HTMLUListElement;
+  private searchInput: HTMLInputElement;
+  private cleanSearchInput: HTMLButtonElement;
   private tasks: Task[];
   private selectedStatus: TaskStatus = "all";
   private footer: HTMLElement;
 
   constructor() {
-    this.taskInput = document.querySelector(".add-task__input") as HTMLInputElement;
-    this.addTaskButton = document.querySelector(".add-task__button") as HTMLButtonElement;
-    this.taskList = document.querySelector(".add-task__list") as HTMLUListElement;
+    this.taskInput = document.querySelector(".task__input") as HTMLInputElement;
+    this.addTaskButton = document.querySelector(".task__form__button") as HTMLButtonElement;
+    this.taskList = document.querySelector(".task__list") as HTMLUListElement;
+    this.searchInput = document.querySelector(".search-task__input") as HTMLInputElement;
+    this.cleanSearchInput = document.querySelector(".search-task__button") as HTMLButtonElement;
     this.footer = document.querySelector("footer") as HTMLElement;
     this.tasks = [];
   }
@@ -25,6 +29,7 @@ class App {
     this.addTaskButton.addEventListener("click", this.handleAddTaskButtonClick);
     const selectElement = document.querySelector('.filter__select') as HTMLSelectElement;
     selectElement.addEventListener('change', this.handleFilterSelectChange);
+    this.searchInput.addEventListener("input", this.handleSearchChange);
     this.displayCatImage();
     this.displayDogImage();
   }
@@ -209,7 +214,17 @@ class App {
   
     listItem.replaceChild(input, title);
     input.focus();
-  }  
+  }
+
+  private handleSearchChange = (): void => {
+    const keyword = this.searchInput.value.trim();
+    const filteredTasks = searchTasks(this.tasks, keyword);
+    this.cleanSearchInput.addEventListener("click", () => {
+      this.searchInput.value = "";
+      this.filterTasksAndUpdateList();
+    });
+    this.updateTaskList(filteredTasks);
+  }
   
   private deleteTask(task: Task): void {
     this.tasks = this.tasks.filter((t) => t.id !== task.id);

@@ -19,22 +19,9 @@ body {
     margin-bottom: 1em;
     color: #383838;
   }
-  .add-task {
-
-    &__form {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    &__input {
-      width: 100%;
-      padding: 8px;
-      margin-right: 1em;
-      font-size: 1em;
-      border: 1px solid #383838;
-      border-radius: 4px;
-    }
-    &__button {
+  .task {
+    
+    button {
       padding: 8px 20px;
       font-size: 1em;
       border: none;
@@ -44,8 +31,34 @@ body {
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    &__button:hover {
+    button:hover {
       background-color: #000000;
+    }
+    &__form {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      &__input {
+        width: 100%;
+        padding: 8px;
+        margin-right: 1em;
+        font-size: 1em;
+        border: 1px solid #383838;
+        border-radius: 4px;
+      }
+    }
+    .search-task {
+      display: flex;
+
+      &__input {
+        width: 30%;
+        padding: 8px;
+        margin-right: 1em;
+        font-size: 1em;
+        border: 1px solid #383838;
+        border-radius: 4px;
+      }
     }
     .filter {
       margin-top: 20px;
@@ -79,15 +92,6 @@ body {
         button {
           padding: 5px 10px;
           font-size: 14px;
-          border: none;
-          background-color: #383838;
-          color: #fff;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-        }
-        button:hover {
-          background-color: #000000;
         }
         .delete-button {
           margin-left: 0.5em;

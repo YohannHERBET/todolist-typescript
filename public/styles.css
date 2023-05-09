@@ -19,20 +19,7 @@ body {
   margin-bottom: 1em;
   color: #383838;
 }
-.container .add-task__form {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-.container .add-task__input {
-  width: 100%;
-  padding: 8px;
-  margin-right: 1em;
-  font-size: 1em;
-  border: 1px solid #383838;
-  border-radius: 4px;
-}
-.container .add-task__button {
+.container .task button {
   padding: 8px 20px;
   font-size: 1em;
   border: none;
@@ -42,25 +29,49 @@ body {
   cursor: pointer;
   transition: background-color 0.3s;
 }
-.container .add-task__button:hover {
+.container .task button:hover {
   background-color: #000000;
 }
-.container .add-task .filter {
+.container .task__form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.container .task__form__input {
+  width: 100%;
+  padding: 8px;
+  margin-right: 1em;
+  font-size: 1em;
+  border: 1px solid #383838;
+  border-radius: 4px;
+}
+.container .task .search-task {
+  display: flex;
+}
+.container .task .search-task__input {
+  width: 30%;
+  padding: 8px;
+  margin-right: 1em;
+  font-size: 1em;
+  border: 1px solid #383838;
+  border-radius: 4px;
+}
+.container .task .filter {
   margin-top: 20px;
   display: flex;
   justify-content: center;
 }
-.container .add-task .filter .filter__select {
+.container .task .filter .filter__select {
   padding: 8px;
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.container .add-task__list {
+.container .task__list {
   list-style-type: none;
   padding: 0;
 }
-.container .add-task__list li {
+.container .task__list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,34 +80,25 @@ body {
   border-radius: 4px;
   border: 1px solid #dcdcdc;
 }
-.container .add-task__list li div {
+.container .task__list li div {
   margin: 8px;
   display: flex;
 }
-.container .add-task__list li button {
+.container .task__list li button {
   padding: 5px 10px;
   font-size: 14px;
-  border: none;
-  background-color: #383838;
-  color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
-.container .add-task__list li button:hover {
-  background-color: #000000;
-}
-.container .add-task__list li .delete-button {
+.container .task__list li .delete-button {
   margin-left: 0.5em;
 }
-.container .add-task__list li > span {
+.container .task__list li > span {
   cursor: pointer;
   padding: 12px;
   width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.container .add-task__list li input {
+.container .task__list li input {
   width: 75%;
   margin-left: 0.5em;
   padding: 0.4em;
