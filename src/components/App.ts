@@ -45,7 +45,7 @@ class App {
 
   private async displayCatImage(): Promise<void> {
     const catImageURL = await fetchCatImage();
-    const catImage = document.createElement("img");
+    const catImage = document.createElement("img") as HTMLImageElement;
     catImage.src = catImageURL;
     catImage.alt = "photo de chat un peu foufou"
     catImage.classList.add("animal-image");
@@ -54,7 +54,7 @@ class App {
 
   private async displayDogImage(): Promise<void> {
     const dogImageURL = await fetchDogImage();
-    const dogImage = document.createElement("img");
+    const dogImage = document.createElement("img") as HTMLImageElement;
     dogImage.src = dogImageURL;
     dogImage.alt = "photo de chien qui fait waouf"
     dogImage.classList.add("animal-image");
@@ -86,15 +86,15 @@ class App {
       completed: false,
     };
 
-    const listItem = document.createElement("li");
-    const title = document.createElement("span");
+    const listItem = document.createElement("li") as HTMLLIElement;
+    const title = document.createElement("span") as HTMLSpanElement;
     title.textContent = task.title;
     title.addEventListener("click", () => {
       this.handleTaskClick(listItem, title, task);
     });
     listItem.appendChild(title);
 
-    const completeButton = document.createElement("button");
+    const completeButton = document.createElement("button") as HTMLButtonElement;
     completeButton.textContent = "Terminer";
     completeButton.addEventListener("click", () => {
       const updatedTask: Task = {
@@ -110,13 +110,13 @@ class App {
       this.saveTasksToLocalStorage();
     });
 
-    const deleteButton = document.createElement("button");
+    const deleteButton = document.createElement("button") as HTMLButtonElement;
     deleteButton.classList.add('delete-button');
     deleteButton.innerHTML = '<span>&#10006;</span>';
     deleteButton.addEventListener("click", () => {
       this.deleteTask(task);
     });
-    const containerButtons = document.createElement("div");
+    const containerButtons = document.createElement("div") as HTMLDivElement;
     containerButtons.appendChild(completeButton);
     containerButtons.appendChild(deleteButton);
     listItem.appendChild(containerButtons);
@@ -143,15 +143,15 @@ class App {
     this.taskList.innerHTML = "";
 
     tasks.forEach((task) => {
-      const listItem = document.createElement("li");
-      const title = document.createElement("span");
+      const listItem = document.createElement("li") as HTMLLIElement;
+      const title = document.createElement("span") as HTMLSpanElement;
       title.textContent = task.title;
       title.addEventListener("click", () => {
         this.handleTaskClick(listItem, title, task);
       });
       listItem.appendChild(title);
 
-      const completeButton = document.createElement("button");
+      const completeButton = document.createElement("button") as HTMLButtonElement;
       completeButton.textContent = task.completed ? "Reprendre" : "Terminer";
       completeButton.addEventListener("click", () => {
         const updatedTask: Task = {
@@ -167,13 +167,13 @@ class App {
         this.saveTasksToLocalStorage();
       });
 
-      const deleteButton = document.createElement("button");
+      const deleteButton = document.createElement("button") as HTMLButtonElement;
       deleteButton.classList.add('delete-button');
       deleteButton.innerHTML = '<span>&#10006;</span>';
       deleteButton.addEventListener("click", () => {
         this.deleteTask(task);
       });
-      const containerButtons = document.createElement("div");
+      const containerButtons = document.createElement("div") as HTMLDivElement;
       containerButtons.appendChild(completeButton);
       containerButtons.appendChild(deleteButton);
       listItem.appendChild(containerButtons);
@@ -182,7 +182,7 @@ class App {
   }
 
   private handleTaskClick(listItem: HTMLLIElement, title: HTMLSpanElement, task: Task): void {
-    const input = document.createElement("input");
+    const input = document.createElement("input") as HTMLInputElement;
     input.type = "text";
     input.value = task.title;
   

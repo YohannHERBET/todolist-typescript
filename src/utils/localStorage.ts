@@ -1,6 +1,6 @@
 import { Task } from "../models/task";
 
-const STORAGE_KEY = 'tasks';
+const STORAGE_KEY = 'tasks' as const;
 
 export const saveTasks = (tasks: Task[]): void => {
   const tasksJSON = JSON.stringify(tasks);
